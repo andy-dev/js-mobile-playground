@@ -8,6 +8,9 @@ var GameState = {
 
   },
   create: function(){
+
+    this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    this.scale.pageAlignVertically = true;
     this.background = this.game.add.sprite(0,0,'background');
     this.chicken = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'chicken')
     this.chicken.anchor.setTo(0.5, 0.5); //change location of anchor point to center
