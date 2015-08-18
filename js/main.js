@@ -12,6 +12,9 @@ var GameState = {
     this.chicken = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'chicken')
     this.chicken.anchor.setTo(0.5, 0.5); //change location of anchor point to center
     this.chicken.scale.setTo(0.5);
+    this.horse = this.game.add.sprite(500,300, 'horse');
+    this.horse.anchor.setTo(0.5);
+    this.scale.setTo(-1,1) //flip on x stay the same on y
   },
   update: function(){
 
