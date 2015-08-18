@@ -4,7 +4,7 @@ var GameState = {
     this.load.image('chicken', 'assets/images/chicken.png');
     this.load.image('horse', 'assets/images/horse.png');
     this.load.image('pig', 'assets/images/pig.png');
-    this.load.image('sheep3', 'assets/images/sheep3.png');
+    this.load.image('sheep', 'assets/images/sheep3.png');
 
   },
   create: function(){
@@ -12,12 +12,17 @@ var GameState = {
     this.chicken = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'chicken')
     this.chicken.anchor.setTo(0.5, 0.5); //change location of anchor point to center
     this.chicken.scale.setTo(0.5);
+
     this.horse = this.game.add.sprite(500,300, 'horse');
     this.horse.anchor.setTo(0.5);
-    this.scale.setTo(-1,1) //flip on x stay the same on y
+    this.horse.scale.setTo(1,1) //flip on x stay the same on y
+
+    this.sheep = this.game.add.sprite(100,250, 'sheep');
+    this.sheep.scale.setTo(0.5);
+    this.sheep.angle = -45;
   },
   update: function(){
-
+    this.sheep.angle += 0.5;
   }
 };
 
