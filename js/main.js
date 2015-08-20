@@ -1,4 +1,6 @@
+
 var GameState = {
+
   //load the game assets before the game starts
   preload: function() {
     this.game.load.image('background', 'assets/images/background.png');
