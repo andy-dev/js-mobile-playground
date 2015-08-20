@@ -24,6 +24,19 @@ var GameState = {
     //create a sprite for the background
     this.background = this.game.add.sprite(0, 0, 'background')
 
+    var animalData = [
+      {key: 'chicken', text:'CHICKEN'},
+      {key: 'horse', text:'HORSE'},
+      {key: 'pig', text:'PIG'},
+      {key: 'sheep', text:'SHEEP'},
+    ];
+
+    this.animals = this.game.add.group();
+    var self = this;
+    animalData.forEach(function(element){
+      self.animals.create(200, self.game.world.centerY, element.key)
+    })
+
     this.pig = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'pig');
     this.pig.anchor.setTo(0.5);
 
