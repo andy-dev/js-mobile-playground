@@ -47,13 +47,6 @@ var GameState = {
     this.currentAnimal = this.animals.next();
     this.currentAnimal.position.setTo(this.game.world.centerX, this.game.world.centerY);
 
-    this.pig = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'pig');
-    this.pig.anchor.setTo(0.5);
-
-    //enable user input on sprite
-    this.pig.inputEnabled = true;
-    this.pig.input.pixelPerfectClick = true;
-    this.pig.events.onInputDown.add(this.animateAnimal, this);
 
     //left arrow
     this.leftArrow = this.game.add.sprite(60, this.game.world.centerY, 'arrow');
@@ -81,7 +74,19 @@ var GameState = {
   update: function() {
   },
   switchAnimal: function(sprite, event) {
-    console.log('move animal');
+    var newAnimal, endX;
+    if(sprite.customParams.direction > 0){
+      newAnimal = this.animals.next();
+      endX = 640 + this.currentAnimal.width/2
+    }
+    else {
+      newAnimal = this.animals.previous();
+      endX = -this.currentAnimal.width/2;
+    }
+
+    this.currentAnimal.x = endX;
+    newAnimal.x = this.game.world.centerX;
+    this.currentAnimal = newAnimal;
   },
   animateAnimal: function(sprite, event) {
     console.log('animate animal');
