@@ -33,9 +33,19 @@ var GameState = {
 
     this.animals = this.game.add.group();
     var self = this;
+    var animal;
     animalData.forEach(function(element){
-      self.animals.create(200, self.game.world.centerY, element.key)
-    })
+      animal = self.animals.create(-1000, self.game.world.centerY, element.key);
+
+      animal.customParams = {text: element.text};
+      animal.anchor.setTo(0.5);
+      animal.inputEnabled = true;
+      animal.input.pixelPerfectClick = true;
+      animal.events.onInputDown.add(self.animateAnimal, self);
+    });
+
+    this.currentAnimal = this.animals.next();
+    this.currentAnimal.position.setTo(this.game.world.centerX, this.game.world.centerY);
 
     this.pig = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'pig');
     this.pig.anchor.setTo(0.5);
