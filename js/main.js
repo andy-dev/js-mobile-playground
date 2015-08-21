@@ -5,10 +5,15 @@ var GameState = {
   preload: function() {
     this.game.load.image('background', 'assets/images/background.png');
     this.game.load.image('arrow', 'assets/images/arrow.png');
-    this.game.load.image('chicken', 'assets/images/chicken.png');
-    this.game.load.image('horse', 'assets/images/horse.png');
-    this.game.load.image('pig', 'assets/images/pig.png');
-    this.game.load.image('sheep', 'assets/images/sheep3.png');
+    // this.game.load.image('chicken', 'assets/images/chicken.png');
+    // this.game.load.image('horse', 'assets/images/horse.png');
+    // this.game.load.image('pig', 'assets/images/pig.png');
+    // this.game.load.image('sheep', 'assets/images/sheep3.png');
+
+    this.load.spritesheet('chicken', 'assets/images/chicken_spritesheet.png', 131,200,3);
+    this.load.spritesheet('horse', 'assets/images/horse_spritesheet.png', 212,200,3);
+    this.load.spritesheet('pig', 'assets/images/pig_spritesheet.png', 297,200,3);
+    this.load.spritesheet('sheep', 'assets/images/sheep_spritesheet.png', 244,200,3);
 
   },
   //executed after everything is loaded
@@ -35,10 +40,12 @@ var GameState = {
     var self = this;
     var animal;
     animalData.forEach(function(element){
-      animal = self.animals.create(-1000, self.game.world.centerY, element.key);
+      animal = self.animals.create(-1000, self.game.world.centerY, element.key, 0);
 
       animal.customParams = {text: element.text};
       animal.anchor.setTo(0.5);
+
+      animal.animations.add('animate', [0,1,2,1,0,1], 3, false)
       animal.inputEnabled = true;
       animal.input.pixelPerfectClick = true;
       animal.events.onInputDown.add(self.animateAnimal, self);
@@ -73,6 +80,11 @@ var GameState = {
   //this is executed multiple times per second
   update: function() {
   },
+
+  animateAnimal:function(sprite,event){
+    sprite.play('animate');
+  },
+
   switchAnimal: function(sprite, event) {
 
     if(this.isMoving){
@@ -106,11 +118,7 @@ var GameState = {
     currentAnimalMovement.start();
 
     this.currentAnimal = newAnimal;
-  },
-  animateAnimal: function(sprite, event) {
-    console.log('animate animal');
   }
-
 
 };
 
