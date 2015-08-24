@@ -24,39 +24,52 @@ var GameState = {
     this.pet.inputEnabled = true;
     this.pet.input.enableDrag();
 
-    this.apple = this.game.add.sprite(72,570, 'apple');
+    this.apple = this.game.add.sprite(72, 570, 'apple');
     this.apple.anchor.setTo(0.5);
-    this.apple.inputEnable = true;
+    this.apple.inputEnabled = true;
     this.apple.customParams = {health: 20};
     this.apple.events.onInputDown.add(this.pickItem, this);
 
-    this.candy = this.game.add.sprite(144,570, 'candy');
+    this.candy = this.game.add.sprite(144, 570, 'candy');
     this.candy.anchor.setTo(0.5);
-    this.candy.inputEnable = true;
+    this.candy.inputEnabled = true;
     this.candy.customParams = {health: -10, fun: 10};
     this.candy.events.onInputDown.add(this.pickItem, this);
 
-    this.toy = this.game.add.sprite(216,570, 'toy');
+    this.toy = this.game.add.sprite(216, 570, 'toy');
     this.toy.anchor.setTo(0.5);
-    this.toy.inputEnable = true;
+    this.toy.inputEnabled = true;
     this.toy.customParams = {fun: 20};
     this.toy.events.onInputDown.add(this.pickItem, this);
 
-    this.rotate = this.game.add.sprite(288,570, 'rotate');
+    this.rotate = this.game.add.sprite(288, 570, 'rotate');
     this.rotate.anchor.setTo(0.5);
-    this.rotate.inputEnable = true;
+    this.rotate.inputEnabled = true;
     this.rotate.events.onInputDown.add(this.rotatePet, this);
 
     this.buttons = [this.apple, this.candy, this.toy, this.rotate];
 
+    //nothing is selected
     this.selectedItem = null;
 
+    //the user interface (UI) is not blocked at the start
+    this.uiBlocked = false;
   },
   pickItem: function(sprite, event){
-    console.log('pick item')
+
+    if(!this.uiBlocked){
+      console.log('pick item');
+      this.clearSelection();
+      sprite.alpha = 0.4;
+      this.selectedItem = sprite;
+    }
+
   },
   rotatePet: function(sprite, event){
     console.log('rotatePet')
+  },
+  clearSelection: function(){
+
   }
 };
 
