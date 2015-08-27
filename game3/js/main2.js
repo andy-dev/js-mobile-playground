@@ -67,6 +67,11 @@ var GameState = {
     this.funText = this.game.add.text(185, 20, '', style);
 
     this.refreshStats();
+
+    //decrease the health every 5 seconds
+    //in phaser there is an object called time that allows us to create this cool behavior
+    //every 5 seconds we will call on this method reduceProperties pass the context this
+    this.statsDecreaser = this.game.time.events.loop(Phaser.Timer.SECOND * 5, this.reduceProperties, this);
   },
   pickItem: function(sprite, event){
 
@@ -136,6 +141,23 @@ var GameState = {
   refreshStats: function(){
     this.healthText.text = this.pet.customParams.health;
     this.funText.text = this.pet.customParams.fun;
+  },
+  reduceProperties: function(){
+    this.pet.customParams.health -=10;
+    this.pet.customParams.fun -=10;
+    this.refreshStats();
+  },
+  //phaser gets check all the time, anything you want to check multiple times
+  update: function() {
+    if(this.pet.customParams.health <= 0 || this.pet.customParams.fun <= 0) {
+      this.pet.frame = 4;
+      this.uiBlocked = true;
+
+      this.game.time.events.add(2000, this.gameOver, this);
+    }
+  },
+  gameOver: function() {
+    this.game.state.restart();
   }
 };
 
