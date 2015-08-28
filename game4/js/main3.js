@@ -31,12 +31,10 @@ var GameState = {
     this.player.animations.add('walking', [0, 1, 2, 1], 6, true);
     this.player.play('walking');
 
-  },
-  update: function() {
-
   }
 
 };
+
 
 
 var game = new Phaser.Game(360, 592, Phaser.AUTO);
